@@ -9,10 +9,11 @@ SNAKE_MOVE=3
 
 #variable
 position=0
-
+diceCount=0
 while [ $position -lt 100 ]
 do
 	diceResult=$(( RANDOM%6+1 ))
+	diceCount=$(( $diceCount+1 ))
 	getMove=$(( RANDOM%3+1 ))
 	case $getMove in
 		$NO_PLAY)
@@ -34,6 +35,6 @@ do
 				fi
  				;;
 	esac
-echo $position
+echo "$position-->$diceCount"
 done
 
