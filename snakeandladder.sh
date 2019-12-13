@@ -9,22 +9,21 @@ SNAKE_MOVE=3
 
 #variable
 position=0
-playerPosition=0
 
 while [ $position -lt 100 ]
 do
 	diceResult=$(( RANDOM%6+1 ))
-	moves=$(( RANDOM%3+1 ))
-	case $moves in
-			1)
-				position=$(( $position )) ;;
-			2)
-				position=$(( $position + $diceResult )) ;;
-			3)
-				position=$(( $position - $diceResult ))
+	getMove=$(( RANDOM%3+1 ))
+	case $getMoves in
+		$NO_PLAY)
+			position=$(( $position )) ;;
+		$LADDER_MOVE)
+			position=$(( $position + $diceResult )) ;;
+		$SNAKE_MOVE)
+			position=$(( $position - $diceResult ))
 				if [ $position -lt 0 ]
 				then
-						position=0
+					position=0
 				fi
  				;;
 	esac
