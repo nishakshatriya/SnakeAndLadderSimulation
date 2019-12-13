@@ -2,6 +2,11 @@
 
 echo "Welcome to Snake and Ladder Game!"
 
+#CONSTANT
+NO_PLAY=1
+LADDER_MOVE=2
+SNAKE_MOVE=3
+
 #variable
 position=0
 playerPosition=0
@@ -23,7 +28,6 @@ do
 				fi
  				;;
 	esac
-
 echo $position
 done
 
