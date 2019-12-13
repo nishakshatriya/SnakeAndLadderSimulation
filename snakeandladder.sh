@@ -14,11 +14,18 @@ while [ $position -lt 100 ]
 do
 	diceResult=$(( RANDOM%6+1 ))
 	getMove=$(( RANDOM%3+1 ))
-	case $getMoves in
+	case $getMove in
 		$NO_PLAY)
-			position=$(( $position )) ;;
+			position=$(( $position ))	;;
+
 		$LADDER_MOVE)
-			position=$(( $position + $diceResult )) ;;
+			position=$(( $position + $diceResult ))
+				if [ $position -gt 100 ]
+				then
+					position=$(( $position - $diceResult ))
+				fi
+				;;
+
 		$SNAKE_MOVE)
 			position=$(( $position - $diceResult ))
 				if [ $position -lt 0 ]
