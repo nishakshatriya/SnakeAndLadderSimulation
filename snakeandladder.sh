@@ -2,6 +2,11 @@
 
 echo "Welcome to Snake and Ladder Game!"
 
+#CONSTANT
+NO_PLAY=1
+LADDER_MOVE=2
+SNAKE_MOVE=3
+
 #variable
 position=0
 
@@ -9,11 +14,11 @@ diceResult=$(( RANDOM%6+1 ))
 moves=$(( RANDOM%3+1 ))
 
 case $moves in
-		1)
+		$NO_PLAY)
 			playerPosition=$(( $position )) ;;
-		2)
+		$LADDER_MOVE)
 			playerPosition=$(( $position + $diceResult )) ;;
-		3)
+		$SNAKE_MOVE)
 			playerPosition=$(( $position - $diceResult )) ;;
 esac
 
