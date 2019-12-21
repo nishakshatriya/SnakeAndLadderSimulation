@@ -11,58 +11,61 @@ LADDER_MOVE=2
 SNAKE_MOVE=3
 
 #variable
-player=1
-position=0
+
+positionNumber=0
 diceCount=0
-playerOne=0
-playerTwo=0
+
 
 function rollingDice()
 {
-	position=$1
+	positionNumber=$1
 	diceResult=$(( RANDOM%6+1 ))
 	diceCount=$(( $diceCount+1 ))
 	getMove=$(( RANDOM%3+1 ))
 	case $getMove in
 		$NO_PLAY)
-			position=$(( $position ))	;;
+			positionNumber=$(( $positionNumber ))	;;
 
 		$LADDER_MOVE)
-			position=$(( $position + $diceResult ))
-			if [ $position -gt 100 ]
+			positionNumber=$(( $positionNumber + $diceResult ))
+			if [ $positionNumber -gt 100 ]
 			then
-				position=$(( $position - $diceResult ))
+				positionNumber=$(( $positionNumber - $diceResult ))
 			fi
 			;;
 
 		$SNAKE_MOVE)
-			position=$(( $position - $diceResult ))
-			if [ $position -lt 0 ]
+			positionNumber=$(( $positionNumber - $diceResult ))
+			if [ $positionNumber -lt 0 ]
 			then
-				position=0
+				positionNumber=0
 			fi
  			;;
 	esac
-echo "$position $count"
+echo "$positionNumber $count"
 }
 
 function checkingWhoWins()
 {
-	while [ $playerOne -lt $WIN_POSITION ] && [ $playerTwo -lt $WIN_POSITION ]
+	playerTurn=1
+	playerOnePos=0
+	playerTwoPos=0
+
+	while [ $playerOnePos -lt $WIN_POSITION ] && [ $playerTwoPos -lt $WIN_POSITION ]
 	do
-		if [ $player -eq 1 ]
+		if [ $playerTurn -eq 1 ]
 		then
-			playerOne=$( rollingDice $playerOne )
-			position=$playerOne
-			player=2
+			playerOnePos=$( rollingDice $playerOnePos )
+			positionNumber=$playerOnePos
+			playerTurn=2
 		else
-			playerTwo=$( rollingDice $playerTwo )
-			position=$playerTwo
-			player=1
+			playerTwoPos=$( rollingDice $playerTwoPos )
+			positionNumber=$playerTwoPos
+			playerTurn=1
 		fi
 done
 
-	if [ $playerOne -eq $WIN_POSITION ]
+	if [ $playerOnePos -eq $WIN_POSITION ]
 	then
 		echo "playerOne is Winner!!"
 	else
